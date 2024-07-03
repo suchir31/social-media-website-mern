@@ -10,10 +10,10 @@ const app = express();
 app.use(express.json());
 app.use(cors(
     {
-        origin: ["https://deploy-mern-frontend.vercel.app"],
+        origin: ["https://soci-api.vercel.app"],
         methods: ["POST", "GET"],
         credentials: true
-    }
+    })
 app.get("/", (req, res) => {
     res.json("Hello");
 })
