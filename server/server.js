@@ -8,7 +8,15 @@ const postRoutes = require('./routes/posts');
 const app = express();
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+    {
+        origin: ["https://deploy-mern-frontend.vercel.app"],
+        methods: ["POST", "GET"],
+        credentials: true
+    }
+app.get("/", (req, res) => {
+    res.json("Hello");
+})
 app.use('/api/users', userRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api',postRoutes);
