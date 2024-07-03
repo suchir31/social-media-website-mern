@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors(
     {
-        origin: ["https://soci-front.vercel.app/"],
+        origin: ["https://soci-front.vercel.app"],
         methods: ["POST", "GET"],
         credentials: true
     }
