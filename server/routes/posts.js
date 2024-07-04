@@ -41,7 +41,6 @@ router.get('/posts', verifyToken, async (req, res) => {
   try {
     const userId = req.user._id; // Extract user ID from the verified token
     const posts = await Post.find({ user: userId }).sort({ createdAt: -1 });
-    console.log("posts=",posts);
     res.json(posts);
   } catch (error) {
     console.error('Error fetching posts:', error);
@@ -111,7 +110,6 @@ router.get('/posts/:username', verifyToken, async (req, res) => {
 
     // Find posts created by the user
     const posts = await Post.find({ user: user._id }).sort({ createdAt: -1 });
-    console.log(posts,"newzzz");
     res.json(posts);
   } catch (error) {
     console.error('Error fetching posts:', error);
