@@ -23,7 +23,7 @@ const AddPost = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/posts', formData, {
+      await axios.post('https://soci-api1.onrender.com/api/posts', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
