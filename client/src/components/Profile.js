@@ -9,6 +9,7 @@ const Profile = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [friendRequests, setFriendRequests] = useState([]);
   const [unreadMessageCounts, setUnreadMessageCounts] = useState({});
+  const [likes, setLikes] = useState({});
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
