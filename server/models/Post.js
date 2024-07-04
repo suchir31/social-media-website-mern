@@ -7,8 +7,8 @@ const postSchema = new mongoose.Schema({
     required: true
   },
   image: {
-    type: String, // Store image URL
-    required: true
+    data: Buffer,
+    contentType: String
   },
   caption: {
     type: String,
@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema({
   },
   likes: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'User'
   }],
   createdAt: {
     type: Date,
