@@ -28,23 +28,52 @@ const Profile = () => {
 
     fetchProfile();
   }, []);
-  useEffect(() => {
+ useEffect(() => {
     const fetchPosts = async () => {
       try {
         const token = localStorage.getItem('token');
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
+
         const response = await axios.get('https://soci-api1.onrender.com/api/posts', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setPosts(response.data);
+        console.log(response.data);
+        // Convert binary image data to Base64
+        const postsWithImages = response.data.map(post => {
+          if (post.image && post.image.data) {
+            const base64String = btoa(
+              new Uint8Array(post.image.data.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ''
+              )
+            );
+            return { ...post, imageBase64: `data:${post.image.contentType};base64,${base64String}` };
+          } else {
+            console.warn(`Post ${post._id} does not have valid image data`);
+            return { ...post, imageBase64: null };
+          }
+        });
+ 
+        setPosts(postsWithImages);
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        if (error.response) {
+          console.error('Error fetching posts:', error.response.data);
+        } else if (error.request) {
+          console.error('Error fetching posts: No response received');
+        } else {
+          console.error('Error fetching posts:', error.message);
+        }
       }
     };
 
     fetchPosts();
   }, []);
+
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -300,7 +329,7 @@ const Profile = () => {
         {posts.map(post => (
           <div key={post._id}>
             <h3>{post.caption}</h3>
-            <img src={`http://localhost:5000/${post.image}`} alt={post.caption} />
+           <img src={post.imageBase64} alt={post.caption} />
             <button onClick={() => handleDeletePost(post._id)}>Delete</button>
           </div>
         ))}
