@@ -129,7 +129,7 @@ const ViewProfile = () => {
           posts.map((post) => (
             <div key={post._id} >
               <h3>{post.caption}</h3>
-              <img src={`http://localhost:5000/${post.image}`} alt={post.caption} style={{ maxWidth: '100%' }} />
+               <img src={post.imageBase64} alt={post.caption} />
               <div className="post-actions">
   <button onClick={() => handleLike(post._id)} className="like-button">Like</button>
   <span className="like-count">{post.likes.length} likes</span>
