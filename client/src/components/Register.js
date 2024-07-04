@@ -12,7 +12,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://soci-api.vercel.app/api/users/register', { username, email, password });
+      await axios.post('https://soci-api1.onrender.com/api/users/register', { username, email, password });
       navigate('/login'); // Navigate to the login page after successful registration
     } catch (err) {
       console.error('Registration error:', err);
