@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
+      const response = await axios.post('https://soci-api1.onrender.com/api/users/login', { email, password });
       const token = response.data.token;
       localStorage.setItem('token', token);
       navigate('/profile'); // Navigate to the profile page after successful login
