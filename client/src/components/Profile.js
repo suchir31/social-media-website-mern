@@ -365,13 +365,34 @@ const Profile = () => {
         <Link to="/add-post">
           <button>Add Post</button>
         </Link>
-        {posts.map(post => (
-          <div key={post._id}>
-            <h3>{post.caption}</h3>
-           <img src={post.imageBase64} alt={post.caption} />
-            <button onClick={() => handleDeletePost(post._id)}>Delete</button>
+             {posts.map(post => (
+        <div key={post._id}>
+          <h3>{post.caption}</h3>
+          <img src={post.imageBase64} alt={post.caption} />
+          <button onClick={() => handleDeletePost(post._id)}>Delete</button>
+          <div className="post-actions">
+            <button onClick={() => handleLike(post._id)} className="like-button">Like</button>
+            <span className="like-count">{post.likes.length} likes</span>
+            <details className="like-details" onClick={() => fetchLikes(post._id)}>
+              <summary>See who liked this</summary>
+              <ul className="liked-users">
+                {likes[post._id] ? (
+                  likes[post._id].map((user) => (
+                    <li key={user._id} className="liked-user">{user.username}</li>
+                  ))
+                ) : (
+                  <li>No likes yet</li>
+                )}
+              </ul>
+            </details>
           </div>
-        ))}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+
       </div>
     </div>
   );
