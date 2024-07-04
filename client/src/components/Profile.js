@@ -156,6 +156,44 @@ const Profile = () => {
       console.error('Error marking messages as seen:', error);
     }
   };
+    const fetchLikes = async (postId) => {
+    try {
+      const token = localStorage.getItem('token');
+      console.log(postId);
+      const response = await axios.get(`https://soci-api1.onrender.com/api/posts/${postId}/like`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setLikes((prevLikes) => ({
+        ...prevLikes,
+        [postId]: response.data,
+      }));
+    } catch (error) {
+      console.error('Error fetching likes:', error);
+    }
+  };
+  const handleLike = async (postId) => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post(`https://soci-api1.onrender.com/api/posts/${postId}/like`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Refresh likes after liking
+      fetchLikes(postId);
+      // Update the number of likes in the post object
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post._id === postId ? { ...post, likes: [...post.likes, token] } : post
+        )
+      );
+    } catch (error) {
+      console.error('Error liking post:', error);
+    }
+  };
+
   const handleSearch = async (event) => {
     event.preventDefault();
     try {
