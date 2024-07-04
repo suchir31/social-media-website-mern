@@ -4,28 +4,24 @@ const multer = require('multer'); // For handling file uploads
 const { verifyToken } = require('../middlewares/auth');
 const Post = require('../models/Post');
 const User = require('../models/User');
+
 // Multer configuration for handling file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/') // Folder where images will be stored
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname) // Unique filename
-  }
-});
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // POST route to add a new post with image upload
 router.post('/posts', verifyToken, upload.single('image'), async (req, res) => {
-   //console.log("post");
+  console.log("post-came");
   try {
     const { caption } = req.body;
-    const imageUrl = req.file.path; // Path to uploaded image
 
     // Create a new post
     const newPost = new Post({
       user: req.user._id, // Current authenticated user
-      image: imageUrl,
+      image: {
+        data: req.file.buffer,
+        contentType: req.file.mimetype
+      },
       caption: caption
     });
 
@@ -39,11 +35,13 @@ router.post('/posts', verifyToken, upload.single('image'), async (req, res) => {
   }
 });
 
-module.exports = router;
+// GET route to fetch posts by the current user
 router.get('/posts', verifyToken, async (req, res) => {
+  console.log("came-post");
   try {
     const userId = req.user._id; // Extract user ID from the verified token
     const posts = await Post.find({ user: userId }).sort({ createdAt: -1 });
+    console.log("posts=",posts);
     res.json(posts);
   } catch (error) {
     console.error('Error fetching posts:', error);
@@ -51,7 +49,7 @@ router.get('/posts', verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+// DELETE route to delete a post by ID
 router.delete('/posts/:id', verifyToken, async (req, res) => {
   try {
     const postId = req.params.id;
@@ -76,8 +74,7 @@ router.delete('/posts/:id', verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
-
+// POST route to like a post
 router.post('/posts/:id/like', verifyToken, async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
@@ -101,7 +98,7 @@ router.post('/posts/:id/like', verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+// GET route to fetch posts by username
 router.get('/posts/:username', verifyToken, async (req, res) => {
   const { username } = req.params;
 
@@ -111,9 +108,10 @@ router.get('/posts/:username', verifyToken, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    console.log(user);
+
     // Find posts created by the user
     const posts = await Post.find({ user: user._id }).sort({ createdAt: -1 });
+    console.log(posts,"newzzz");
     res.json(posts);
   } catch (error) {
     console.error('Error fetching posts:', error);
@@ -121,10 +119,9 @@ router.get('/posts/:username', verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+// GET route to fetch likes on a post
 router.get('/posts/:postId/like', verifyToken, async (req, res) => {
   try {
-    console.log("like");
     const { postId } = req.params;
     const post = await Post.findById(postId).populate('likes', 'username'); // Populate likes with username
     if (!post) {
@@ -136,3 +133,5 @@ router.get('/posts/:postId/like', verifyToken, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+module.exports = router;
