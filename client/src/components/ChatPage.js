@@ -13,7 +13,7 @@ const ChatPage = () => {
       const token = localStorage.getItem('token');
       console.log(token,"&&")
       const response = await axios.get(
-        `http://localhost:5000/api/messages/conversation/${friendUsername}`,
+        `https://soci-api1.onrender.com/api/messages/conversation/${friendUsername}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -34,7 +34,7 @@ const ChatPage = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        'http://localhost:5000/api/messages/send',
+        'https://soci-api1.onrender.com/api/messages/send',
         { recipientUsername: friendUsername, content: message },
         {
           headers: {
