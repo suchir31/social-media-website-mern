@@ -12,7 +12,7 @@ const ViewProfile = () => {
     const fetchFriendInfo = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:5000/api/users/${username}/friends`, {
+        const response = await axios.get(`https://soci-api1.onrender.com/api/users/${username}/friends`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -26,7 +26,7 @@ const ViewProfile = () => {
     const fetchPosts = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:5000/api/posts/${username}`, {
+        const response = await axios.get(`https://soci-api1.onrender.com/api/posts/${username}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -45,7 +45,7 @@ const ViewProfile = () => {
     try {
       const token = localStorage.getItem('token');
       console.log(postId);
-      const response = await axios.get(`http://localhost:5000/api/posts/${postId}/like`, {
+      const response = await axios.get(`https://soci-api1.onrender.com/api/posts/${postId}/like`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -61,7 +61,7 @@ const ViewProfile = () => {
   const handleLike = async (postId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:5000/api/posts/${postId}/like`, {}, {
+      await axios.post(`https://soci-api1.onrender.com/api/posts/${postId}/like`, {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
