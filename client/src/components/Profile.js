@@ -289,7 +289,7 @@ const Profile = () => {
     localStorage.removeItem('token'); // Remove token from localStorage
     navigate('/'); // Navigate to the home page after logout
   };
-  return (
+ return (
     <div className="profile-container">
        <div class="profile-header">
     <h1>Profile</h1>
@@ -365,7 +365,7 @@ const Profile = () => {
         <Link to="/add-post">
           <button>Add Post</button>
         </Link>
-             {posts.map(post => (
+        {posts.map(post => (
         <div key={post._id}>
           <h3>{post.caption}</h3>
           <img src={post.imageBase64} alt={post.caption} />
@@ -388,10 +388,6 @@ const Profile = () => {
           </div>
         </div>
       ))}
-    </div>
-  );
-};
-
 
       </div>
     </div>
