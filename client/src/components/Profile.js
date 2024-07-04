@@ -15,7 +15,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/users/profile', {
+        const res = await axios.get('https://soci-api1.onrender.com/api/users/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -32,7 +32,7 @@ const Profile = () => {
     const fetchPosts = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/posts', {
+        const response = await axios.get('https://soci-api1.onrender.com/api/posts', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -51,7 +51,7 @@ const Profile = () => {
       if (user.username) {
         try {
           const token = localStorage.getItem('token');
-          const res = await axios.get(`http://localhost:5000/api/users/${user.username}/friends`, {
+          const res = await axios.get(`https://soci-api1.onrender.com/api/users/${user.username}/friends`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -70,7 +70,7 @@ const Profile = () => {
     const fetchFriendRequests = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/users/friend-requests', {
+        const res = await axios.get('https://soci-api1.onrender.com/api/users/friend-requests', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -89,7 +89,7 @@ const Profile = () => {
     const fetchUnreadMessageCounts = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:5000/api/messages/unread-counts', {
+        const response = await axios.get('https://soci-api1.onrender.com/api/messages/unread-counts', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -109,7 +109,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/messages/mark-seen/${friendUsername}`,
+        `https://soci-api1.onrender.com/api/messages/mark-seen/${friendUsername}`,
         {},
         {
           headers: {
@@ -130,7 +130,7 @@ const Profile = () => {
     event.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get(`http://localhost:5000/api/users/search?query=${searchQuery}`, {
+      const res = await axios.get(https://soci-api1.onrender.com/api/users/search?query=${searchQuery}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -143,7 +143,7 @@ const Profile = () => {
   const handleDeletePost = async (postId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/posts/${postId}`, {
+      await axios.delete(`https://soci-api1.onrender.com/api/posts/${postId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -159,7 +159,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://localhost:5000/api/users/${friendUsername}/friend-request`,
+        `https://soci-api1.onrender.com/api/users/${friendUsername}/friend-request`,
         {},
         {
           headers: {
@@ -182,7 +182,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `http://localhost:5000/api/users/friend-requests/${requestId}/accept`,
+        `https://soci-api1.onrender.com/api/users/friend-requests/${requestId}/accept`,
         {},
         {
           headers: {
@@ -203,7 +203,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://localhost:5000/api/users/friend-requests/${requestId}/reject`,
+        `https://soci-api1.onrender.com/api/users/friend-requests/${requestId}/reject`,
         {},
         {
           headers: {
