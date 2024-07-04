@@ -8,6 +8,9 @@ const postRoutes = require('./routes/posts');
 const app = express();
 // Middleware
 app.use(express.json());
+app.use(cors({
+  origin: 'https://soci-front.vercel.app'
+}));
 app.get("/", (req, res) => {
     res.json("Hello");
 })
