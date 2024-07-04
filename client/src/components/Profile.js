@@ -130,7 +130,7 @@ const Profile = () => {
     event.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get(https://soci-api1.onrender.com/api/users/search?query=${searchQuery}`, {
+      const res = await axios.get( `https://soci-api1.onrender.com/api/users/search?query=${searchQuery}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
