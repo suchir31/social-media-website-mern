@@ -31,7 +31,7 @@ const ViewProfile = () => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:5000/api/posts/${username}`, {
+        const response = await axios.get(`https://soci-api1.onrender.com/api/posts/${username}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
