@@ -113,7 +113,9 @@ router.get('/:username/friends', verifyToken, async (req, res) => {
 
     // Find friendships by user ID
     const friendships = await Friendship.find({ user: user._id }).populate('friend', 'username');
-    const friends = friendships.map((f) => f.friend);
+    const friends = friendships
+    .filter((f) => f.friend !== null) // Filter out null friends
+    .map((f) => f.friend);
     res.json(friends);
   } catch (error) {
     console.error('Error fetching friends:', error);
