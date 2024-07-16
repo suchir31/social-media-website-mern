@@ -3,13 +3,23 @@ Welcome to Soci, a dynamic social media app designed to foster connections and e
 Features of Soci
 
 User Authentication: Secure user registration and login to protect your account and personal information.
+
 User Profiles: Personalize your profile with a profile picture, bio, and other details to showcase your personality.
+
 Posts: Create and share text, images, and videos to express yourself and keep your friends updated.
+
 Likes: Show your appreciation by liking your friends' posts and see who liked your posts.
+
 Comments: Engage in conversations by commenting on posts and responding to friends' comments.
+
 Real-Time Chat: Connect instantly with friends through real-time messaging.
+
 Friend Requests: Send and receive friend requests to grow your network and make new friends.
+
 Notifications: Stay informed with notifications about likes, comments, friend requests, and chat messages.
+
 Privacy Settings: Control your privacy by managing who can see your posts and profile information.
+
 Search Functionality: Easily find friends, posts, and content using the search feature.
+
 Activity Feed: Stay updated with a real-time feed of posts and activities from your friends and the community.
